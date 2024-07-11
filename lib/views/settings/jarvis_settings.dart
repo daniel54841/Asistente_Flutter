@@ -63,7 +63,7 @@ class JarvisSettings extends StatelessWidget {
             ElevatedButton(
               child: const Text('Test Speak'),
               onPressed: () {
-                setting.speak();
+                setting.speak(null);
               },
             ),
             //Rate

@@ -50,14 +50,18 @@ class SettingsController extends GetxController {
     return null;
   }
 
-  void speak() {
+  void speak(String? value) {
     tts.setVolume(volume);
     tts.setRate(rate);
     if (languageCode != null) {
       tts.setLanguage(languageCode!);
     }
     tts.setPitch(pitch);
-    tts.speak("Buenos dias, esto es una prueba de configuración. Me llamo Jarvis y soy su asistente. En que puedo ayudarle?");
+    if (value != null) {
+      tts.speak(value);
+    } else {
+      tts.speak("Buenos dias, esto es una prueba de configuración. Me llamo Jarvis y soy su asistente. En que puedo ayudarle?");
+    }
   }
 
   setVolumeLanguage(double value) {

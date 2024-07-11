@@ -10,8 +10,8 @@ void main() async {
   //Firebase inicializacion
   WidgetsFlutterBinding.ensureInitialized(); //Firebase.initializeApp();
   Get.put(LoginController());
-  Get.put(VoiceController());
   Get.put(SettingsController());
+  Get.put(VoiceController());
   await Firebase.initializeApp();
   runApp(MyApp());
 }
