@@ -3,6 +3,7 @@ import 'package:reproductor_ia/utils/constants/home_constants.dart';
 import 'package:reproductor_ia/widgets/item_list_views/buy_item.dart';
 
 import '../../utils/responsive.dart';
+import '../../widgets/drawer_menu.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -11,13 +12,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     Responsive responsive = Responsive.of(context);
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [
-            Text("Home"),
-          ],
-        ),
-      ),
+      drawer: const DrawerMenu(),
       backgroundColor: Theme.of(context).splashColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).splashColor,
