@@ -42,7 +42,8 @@ dependencies:
   flutter_animation_progress_bar: 2.3.1
   speech_to_text: 6.6.0
   permission_handler: 9.2.0
-  text_to_speech: ^0.2.3
+  text_to_speech: 0.2.3
+  shared_preferences: 2.2.3
 
 dev_dependencies:
 
