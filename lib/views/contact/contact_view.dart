@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:text_to_speech/text_to_speech.dart';
 
-class WhassapContactView extends StatefulWidget {
-  const WhassapContactView({Key? key}) : super(key: key);
+class ContactView extends StatefulWidget {
+  const ContactView({Key? key}) : super(key: key);
 
   @override
-  State<WhassapContactView> createState() => _WhassapContactViewState();
+  State<ContactView> createState() => _ContactViewState();
 }
 
 /// An example that demonstrates the basic functionality of the
 /// SpeechToText plugin for using the speech recognition capability
 /// of the underlying platform.
-class _WhassapContactViewState extends State<WhassapContactView> {
+class _ContactViewState extends State<ContactView> {
   final String defaultLanguage = 'en-US';
 
   TextToSpeech tts = TextToSpeech();

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reproductor_ia/widgets/drawer/drawer_item.dart';
 
-import '../utils/assets_route.dart';
-import '../utils/responsive.dart';
+import '../../utils/assets_route.dart';
+import '../../utils/responsive.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({Key? key}) : super(key: key);
@@ -37,9 +37,14 @@ class DrawerMenu extends StatelessWidget {
             titleRoute: "Tareas y Alertas",
           ),
           const DrawerItem(
-            route: "/whassap_contact",
+            route: "/contact",
             iconCard: Icons.contact_mail,
             titleRoute: "Contactos",
+          ),
+          const DrawerItem(
+            route: "/settings",
+            iconCard: Icons.settings,
+            titleRoute: "Configuración",
           ),
         ],
       ),
