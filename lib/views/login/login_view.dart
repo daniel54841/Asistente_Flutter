@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:reproductor_ia/utils/assets_route.dart';
 
 import '../../controllers/login_controller.dart';
+import '../../persistence/shared_preferences_manager.dart';
 import '../../utils/responsive.dart';
 import '../../widgets/TextFormFields/custom_text_form_fields.dart';
 
@@ -15,6 +16,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
+  SharedPreferencesManager sharedManager = SharedPreferencesManager();
   TextEditingController? emailAddressController;
   TextEditingController? passwordController;
   final _unfocusNode = FocusNode();
@@ -23,9 +25,12 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    emailAddressController = TextEditingController();
-    passwordController = TextEditingController();
+    emailAddressController = TextEditingController(text: "prueba@gmail.com");
+    passwordController = TextEditingController(text: "123456789");
     _loginCtrl.context = context;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loginCtrl.checkLoginStatus();
+    });
   }
 
   @override
@@ -81,10 +86,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                     ),
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
-                          responsive.dp(2),
-                          responsive.dp(2),
-                          responsive.dp(2),
-                          responsive.dp(2)), //25 en todas
+                          responsive.dp(2), responsive.dp(2), responsive.dp(2), responsive.dp(2)), //25 en todas
                       child: Container(
                         width: responsive.dp(30), //100
                         height: responsive.dp(30),
@@ -93,8 +95,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              responsive.hp(2.1), 0, responsive.hp(2.1), 0), //5
+                          padding: EdgeInsetsDirectional.fromSTEB(responsive.hp(2.1), 0, responsive.hp(2.1), 0), //5
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -104,8 +105,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                                   builder: (LoginController ctrl) {
                                     //'https://assets8.lottiefiles.com/packages/lf20_li0pgakp.json'
                                     return Lottie.asset(
-                                      AssetsRoute.animationPath(
-                                          "Jarvis_Animation"),
+                                      AssetsRoute.animationPath("Jarvis_Animation"),
                                       width: responsive.wp(35), //150
                                       height: responsive.hp(22), //130
                                       fit: BoxFit.cover,
@@ -120,6 +120,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                                   icon: Icons.email_outlined,
                                   titleLabel: "E-mail",
                                   loginCtrl: _loginCtrl,
+                                  isPassword: false,
                                 ),
                                 //TextFormField de la contraseña
                                 CustomTextFormFields(
@@ -127,17 +128,14 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                                   icon: Icons.lock_outline,
                                   titleLabel: "Password",
                                   loginCtrl: _loginCtrl,
+                                  isPassword: true,
                                 ),
                                 //Boton de login
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0, 15, 0, 0),
+                                  padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
                                   child: GestureDetector(
                                     onTap: () async {
-                                      await _loginCtrl
-                                          .signInWithEmailAndPassword(
-                                              emailAddressController!.text,
-                                              passwordController!.text);
+                                      await _loginCtrl.signInWithEmailAndPassword(emailAddressController!.text, passwordController!.text);
                                     },
                                     child: Container(
                                       width: responsive.wp(50), //200

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reproductor_ia/net/login_firebase.dart';
+import 'package:reproductor_ia/persistence/shared_preferences_manager.dart';
 import 'package:reproductor_ia/utils/constants/general_constants.dart';
 import 'package:reproductor_ia/widgets/dialogs/error_custom_dialog.dart';
 
 class LoginController extends GetxController {
+  SharedPreferencesManager sharedManager = SharedPreferencesManager();
+
   ///variables
   bool isRepeat = true;
   late BuildContext context;
@@ -30,6 +33,7 @@ class LoginController extends GetxController {
         String? result = await _operations.login(user, password);
         if (result != null) {
           if (result == "Success") {
+            await sharedManager.setStartLogin(true);
             Get.back();
             Get.offAndToNamed("home");
           }
@@ -73,6 +77,13 @@ class LoginController extends GetxController {
       await ErrorCustomDialog.errorDialog(GeneralConstants.empty_value);
 
       return "";
+    }
+  }
+
+  void checkLoginStatus() async {
+    bool? value = await sharedManager.getLoginStatus();
+    if (value != null && value) {
+      Get.offAndToNamed("home");
     }
   }
 }
