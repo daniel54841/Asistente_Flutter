@@ -5,25 +5,23 @@ import 'package:reproductor_ia/controllers/login_controller.dart';
 import 'package:reproductor_ia/controllers/voice_controller.dart';
 import 'package:reproductor_ia/utils/routes/custom_routes.dart';
 
-Future<void> main() async {
+void main() async {
+  //Firebase inicializacion
+  WidgetsFlutterBinding.ensureInitialized(); //Firebase.initializeApp();
   Get.put(LoginController());
   Get.put(VoiceController());
-  //Firebase inicializacion
-  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "/whassap_contact",
+      initialRoute: "/login",
       getPages: CustomRoutes.getListRoutes(),
     );
   }
