@@ -6,14 +6,15 @@ class CustomTextFormFields extends StatelessWidget {
   final IconData icon;
   final String titleLabel;
   final LoginController loginCtrl;
+  final bool isPassword;
 
-  const
-  CustomTextFormFields({
+  const CustomTextFormFields({
     Key? key,
     required this.ctrl,
     required this.icon,
     required this.titleLabel,
     required this.loginCtrl,
+    required this.isPassword,
   }) : super(key: key);
 
   @override
@@ -26,14 +27,15 @@ class CustomTextFormFields extends StatelessWidget {
         15,
       ),
       child: TextFormField(
-        onTap: (){
+        keyboardType: !isPassword ? TextInputType.emailAddress : TextInputType.visiblePassword,
+        onTap: () {
           loginCtrl.updateLogo(true);
         },
         onTapOutside: (event) {
-            loginCtrl.updateLogo(false);
+          loginCtrl.updateLogo(false);
         },
         controller: ctrl,
-        obscureText: false,
+        obscureText: isPassword,
         decoration: InputDecoration(
           labelText: titleLabel,
           enabledBorder: UnderlineInputBorder(
