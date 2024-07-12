@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ItemContact extends StatelessWidget {
   final Contact contact;
@@ -9,6 +10,22 @@ class ItemContact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
+      key: const ValueKey(0),
+      startActionPane: ActionPane(
+        motion: const ScrollMotion(),
+        dismissible: DismissiblePane(
+          onDismissed: () {},
+        ),
+        children: [
+          SlidableAction(
+            onPressed: (context) {},
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            icon: Icons.call,
+            label: "Llamar",
+          )
+        ],
+      ),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
