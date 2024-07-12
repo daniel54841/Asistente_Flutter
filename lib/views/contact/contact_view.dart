@@ -60,7 +60,7 @@ class _ContactViewState extends State<ContactView> {
             onPressed: () {},
             heroTag: null,
             child: const Icon(
-              Icons.add,
+              Icons.search,
             ),
           ),
           SizedBox(
