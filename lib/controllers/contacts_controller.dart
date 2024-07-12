@@ -8,10 +8,19 @@ class ContactsController extends GetxController {
   void getContacts() async {
     try {
       await FlutterContacts.requestPermission();
-      contact = await FlutterContacts.getContacts();
+      contact = await FlutterContacts.getContacts(withProperties: true);
     } catch (e) {
       debugPrint("Exception in getContacts");
     }
     update();
+  }
+
+  void callContact(Contact contact) {
+    List<Phone> phones = contact.phones;
+
+    if (phones.isNotEmpty) {
+      String phone = phones[1].number;
+      debugPrint("Phone number: $phone");
+    }
   }
 }

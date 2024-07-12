@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:reproductor_ia/controllers/contacts_controller.dart';
 
 class ItemContact extends StatelessWidget {
   final Contact contact;
+  final ContactsController controller;
 
-  const ItemContact({Key? key, required this.contact}) : super(key: key);
+  const ItemContact({
+    Key? key,
+    required this.contact,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,9 @@ class ItemContact extends StatelessWidget {
         ),
         children: [
           SlidableAction(
-            onPressed: (context) {},
+            onPressed: (context) {
+              controller.callContact(contact);
+            },
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
             icon: Icons.call,

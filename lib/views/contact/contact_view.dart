@@ -46,7 +46,10 @@ class _ContactViewState extends State<ContactView> {
         builder: (ContactsController contacts) {
           return ListView.builder(
             itemBuilder: (context, index) {
-              return ItemContact(contact: contacts.contact[index]);
+              return ItemContact(
+                contact: contacts.contact[index],
+                controller: contacts,
+              );
             },
             itemCount: contacts.contact.length,
           );
