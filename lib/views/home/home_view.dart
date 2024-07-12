@@ -56,6 +56,7 @@ class _HomeViewState extends State<HomeView> {
         children: [
           FloatingActionButton(
             onPressed: () {},
+            heroTag: null,
             child: const Icon(
               Icons.add,
             ),

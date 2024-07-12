@@ -6,6 +6,7 @@ import 'package:reproductor_ia/widgets/floatingbutton/voice_floating_button.dart
 import '../../controllers/contacts_controller.dart';
 import '../../controllers/voice_controller.dart';
 import '../../utils/responsive.dart';
+import '../../widgets/item_list_views/item_contacts.dart';
 
 class ContactView extends StatefulWidget {
   const ContactView({Key? key}) : super(key: key);
@@ -14,9 +15,6 @@ class ContactView extends StatefulWidget {
   State<ContactView> createState() => _ContactViewState();
 }
 
-/// An example that demonstrates the basic functionality of the
-/// SpeechToText plugin for using the speech recognition capability
-/// of the underlying platform.
 class _ContactViewState extends State<ContactView> {
   final VoiceController _voiceCtrl = Get.find<VoiceController>();
   final ContactsController _contactsCtrl = Get.find<ContactsController>();
@@ -38,7 +36,7 @@ class _ContactViewState extends State<ContactView> {
         title: Text(
           "Listado de Contactos",
           style: TextStyle(
-            fontSize: responsive.dp(5),
+            fontSize: responsive.dp(2),
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
@@ -48,20 +46,29 @@ class _ContactViewState extends State<ContactView> {
         builder: (ContactsController contacts) {
           return ListView.builder(
             itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  contacts.contact[index].photo != null ? Image.memory(contacts.contact[index].photo!) : const Icon(Icons.contact_phone),
-                  Text(contacts.contact[index].displayName),
-                  //   Text(contacts.contact[index].phones[0].number),
-                  //Text(contacts.contact[index].name.nickname)
-                ],
-              );
+              return ItemContact(contact: contacts.contact[index]);
             },
             itemCount: contacts.contact.length,
           );
         },
       ),
-      floatingActionButton: const VoiceFloatingButton(),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {},
+            heroTag: null,
+            child: const Icon(
+              Icons.add,
+            ),
+          ),
+          SizedBox(
+            height: responsive.dp(1.5),
+          ),
+          const VoiceFloatingButton()
+        ],
+      ),
     );
   }
 }
