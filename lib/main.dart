@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reproductor_ia/controllers/contacts_controller.dart';
 import 'package:reproductor_ia/controllers/login_controller.dart';
 import 'package:reproductor_ia/controllers/settings_controller.dart';
 import 'package:reproductor_ia/controllers/voice_controller.dart';
@@ -12,6 +13,8 @@ void main() async {
   Get.put(LoginController());
   Get.put(SettingsController());
   Get.put(VoiceController());
+  Get.put(ContactsController());
+
   await Firebase.initializeApp();
   runApp(MyApp());
 }

@@ -44,8 +44,8 @@ dependencies:
   permission_handler: 9.2.0
   text_to_speech: 0.2.3
   shared_preferences: 2.2.3
-
-
+  flutter_contacts: 1.1.8
+  phone_numbers_parser: 8.3.0
 dev_dependencies:
 
 

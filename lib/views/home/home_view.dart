@@ -27,44 +27,45 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     Responsive responsive = Responsive.of(context);
     return Scaffold(
-        drawer: const DrawerMenu(),
+      drawer: const DrawerMenu(),
+      backgroundColor: Theme.of(context).splashColor,
+      appBar: AppBar(
         backgroundColor: Theme.of(context).splashColor,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).splashColor,
-          title: Text(
-            HomeConstants.titleHome,
-            style: TextStyle(
-              fontSize: responsive.dp(5),
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+        title: Text(
+          HomeConstants.titleHome,
+          style: TextStyle(
+            fontSize: responsive.dp(5),
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
         ),
-        body: Stack(
-          children: [
-            ListView.builder(
-              itemBuilder: (context, index) {
-                return BuyItem();
-              },
-              itemCount: 2,
-            )
-          ],
-        ),
-        floatingActionButton: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              onPressed: () {},
-              child: const Icon(
-                Icons.add,
-              ),
+      ),
+      body: Stack(
+        children: [
+          ListView.builder(
+            itemBuilder: (context, index) {
+              return BuyItem();
+            },
+            itemCount: 2,
+          )
+        ],
+      ),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(
+              Icons.add,
             ),
-            SizedBox(
-              height: responsive.dp(1.5),
-            ),
-            const VoiceFloatingButton()
-          ],
-        ));
+          ),
+          SizedBox(
+            height: responsive.dp(1.5),
+          ),
+          const VoiceFloatingButton()
+        ],
+      ),
+    );
   }
 }
