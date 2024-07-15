@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../controllers/calendar_controller.dart';
+import '../../utils/events.dart';
 
 class CustomCalendar extends StatelessWidget {
   const CustomCalendar({Key? key}) : super(key: key);
@@ -33,6 +34,32 @@ class CustomCalendar extends StatelessWidget {
               },
             ),
             const SizedBox(height: 8.0),
+            Expanded(
+              child: ValueListenableBuilder<List<Event>>(
+                valueListenable: ctrl.selectedEvents,
+                builder: (BuildContext context, List<Event> value, _) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                          vertical: 4.0,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: ListTile(
+                          onTap: () => print('${value[index]}'),
+                          title: Text('${value[index]}'),
+                        ),
+                      );
+                    },
+                    itemCount: value.length,
+                  );
+                },
+              ),
+            )
           ],
         );
       },
