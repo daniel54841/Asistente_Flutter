@@ -40,7 +40,7 @@ class _CalendarViewState extends State<CalendarView> {
           ),
         ),
       ),
-      body: CustomCalendar(),
+      body: const CustomCalendar(),
       floatingActionButton: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
