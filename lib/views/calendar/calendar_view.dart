@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:reproductor_ia/widgets/calendar/custom_calendar.dart';
 import 'package:reproductor_ia/widgets/drawer/drawer_menu.dart';
-import 'package:table_calendar/table_calendar.dart';
 
+import '../../controllers/calendar_controller.dart';
+import '../../controllers/voice_controller.dart';
 import '../../utils/responsive.dart';
+import '../../widgets/floatingbutton/voice_floating_button.dart';
 
 class CalendarView extends StatefulWidget {
   const CalendarView({super.key});
@@ -12,6 +16,14 @@ class CalendarView extends StatefulWidget {
 }
 
 class _CalendarViewState extends State<CalendarView> {
+  final VoiceController _voiceCtrl = Get.find<VoiceController>();
+  final CalendarController _calendarCtrl = Get.find<CalendarController>();
+  @override
+  void initState() {
+    _voiceCtrl.initSpeech();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Responsive responsive = Responsive.of(context);
@@ -28,10 +40,25 @@ class _CalendarViewState extends State<CalendarView> {
           ),
         ),
       ),
-      body: TableCalendar(
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 3, 14),
-        focusedDay: DateTime.now(),
+      body: CustomCalendar(),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              _calendarCtrl.createEvent();
+            },
+            heroTag: null,
+            child: const Icon(
+              Icons.event_note_sharp,
+            ),
+          ),
+          SizedBox(
+            height: responsive.dp(1.5),
+          ),
+          const VoiceFloatingButton()
+        ],
       ),
     );
   }
