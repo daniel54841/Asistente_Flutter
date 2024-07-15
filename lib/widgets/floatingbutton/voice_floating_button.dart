@@ -14,8 +14,8 @@ class VoiceFloatingButton extends StatelessWidget {
               // If not yet listening for speech start, otherwise stop
               voice.speechToText.isNotListening ? voice.startListening : voice.stopListening,
           tooltip: 'Listen',
-          child: Icon(voice.speechToText.isNotListening ? Icons.mic_off : Icons.mic),
           heroTag: null,
+          child: Icon(voice.speechToText.isNotListening ? Icons.mic_off : Icons.mic),
         );
       },
     );
