@@ -3,10 +3,18 @@ import 'package:get/get.dart';
 
 import '../net/data/alarm_info.dart';
 import '../net/data/menu_info.dart';
+import '../persistence/helpers/alarm_helper.dart';
 import '../views/alarms/alarm_view.dart';
 import '../views/alarms/clock_view.dart';
 
 class AlarmsController extends GetxController {
+  DateTime? alarmTime;
+  String alarmTimeString = "Alarma";
+  bool isRepeatSelected = false;
+  AlarmHelper _alarmHelper = AlarmHelper();
+
+  List<AlarmInfo>? currentAlarms = [];
+
   List<MenuInfo> menuItems = [
     MenuInfo(MenuType.clock, title: 'Reloj', imageSource: 'assets/alarms_timer/clock_icon.png'),
     MenuInfo(MenuType.alarm, title: 'Alarmas', imageSource: 'assets/alarms_timer/alarm_icon.png'),
@@ -14,9 +22,24 @@ class AlarmsController extends GetxController {
     MenuInfo(MenuType.stopwatch, title: 'Cronometro', imageSource: 'assets/alarms_timer/stopwatch_icon.png'),
   ];
 
-  List<AlarmInfo> alarms = [];
+  late Future<List<AlarmInfo>> alarms;
+
+  @override
+  void onInit() {
+    alarmTime = DateTime.now();
+    _alarmHelper.initializeDatabase().then((value) {
+      debugPrint("Database Inicializada de forma correccta");
+      loadAlarms();
+    });
+    super.onInit();
+  }
 
   MenuType menuType = MenuType.clock;
+
+  void loadAlarms() {
+    alarms = _alarmHelper.getAlarms();
+    update();
+  }
 
   void updateMenuType(MenuInfo type) {
     if (type.menuType == MenuType.clock) {
@@ -33,11 +56,11 @@ class AlarmsController extends GetxController {
 
   Widget setView() {
     if (menuType == MenuType.clock) {
-      return ClockView();
+      return const ClockView();
     } else if (menuType == MenuType.alarm) {
-      return AlarmView();
+      return const AlarmView();
     } else {
-      return Center(
+      return const Center(
         child: Text("Pendiente de implementar"),
       );
     }
