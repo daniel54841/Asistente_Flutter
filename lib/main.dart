@@ -8,6 +8,8 @@ import 'package:reproductor_ia/controllers/settings_controller.dart';
 import 'package:reproductor_ia/controllers/voice_controller.dart';
 import 'package:reproductor_ia/utils/routes/custom_routes.dart';
 
+import 'controllers/alarms_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(LoginController());
@@ -15,6 +17,8 @@ void main() async {
   Get.put(VoiceController());
   Get.put(ContactsController());
   Get.put(CalendarController());
+  Get.put(AlarmsController());
+
   //Firebase inicializacion
   await Firebase.initializeApp();
   runApp(MyApp());
