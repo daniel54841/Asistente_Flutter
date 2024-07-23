@@ -14,6 +14,12 @@ class AlarmCard extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(24)),
       ),
       child: MaterialButton(
+        child: const Text(
+          "Añadir Alarma",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         onPressed: () {
           _alarmCtrl.alarmTimeString =
               DateFormat("HH:mm").format(DateTime.now());
