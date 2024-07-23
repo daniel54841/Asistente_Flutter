@@ -5,6 +5,14 @@ class ClockView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Clock View"));
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 32,
+        vertical: 64,
+      ),
+      child: const Column(
+        children: [],
+      ),
+    );
   }
 }
