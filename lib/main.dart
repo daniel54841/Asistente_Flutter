@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reproductor_ia/controllers/calendar_controller.dart';
+import 'package:reproductor_ia/controllers/clock_controller.dart';
 import 'package:reproductor_ia/controllers/contacts_controller.dart';
 import 'package:reproductor_ia/controllers/login_controller.dart';
 import 'package:reproductor_ia/controllers/settings_controller.dart';
@@ -18,6 +19,7 @@ void main() async {
   Get.put(ContactsController());
   Get.put(CalendarController());
   Get.put(AlarmsController());
+  Get.put(ClockController());
 
   //Firebase inicializacion
   await Firebase.initializeApp();
