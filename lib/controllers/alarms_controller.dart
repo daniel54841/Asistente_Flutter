@@ -62,7 +62,7 @@ class AlarmsController extends GetxController {
 
   Widget setView() {
     if (menuType == MenuType.clock) {
-      return const ClockView();
+      return ClockView();
     } else if (menuType == MenuType.alarm) {
       return const AlarmView();
     } else {
