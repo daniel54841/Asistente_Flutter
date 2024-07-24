@@ -29,7 +29,7 @@ class _AlarmViewState extends State<AlarmView> {
             'Alarmas',
             style: TextStyle(
                 fontWeight: FontWeight.w700,
-                color: Theme.of(context).primaryColor,
+                color: CustomColors.primaryTextColor,
                 fontSize: 18),
           ),
           Expanded(
@@ -100,7 +100,11 @@ class _AlarmViewState extends State<AlarmView> {
                                     ),
                                   ],
                                 ),
-                                const Text("Lunes-Viernes"),
+                                Text(
+                                  "Lunes-Viernes",
+                                  style: TextStyle(
+                                      color: CustomColors.primaryTextColor),
+                                ),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -113,7 +117,7 @@ class _AlarmViewState extends State<AlarmView> {
                                           fontWeight: FontWeight.w700),
                                     ),
                                     IconButton(
-                                        icon: Icon(Icons.delete),
+                                        icon: const Icon(Icons.delete),
                                         color: Colors.white,
                                         onPressed: () {
                                           alarmsCtrl.deleteAlarm(alarm.id);
@@ -130,7 +134,7 @@ class _AlarmViewState extends State<AlarmView> {
                               color: const Color(0xFFEAECFF),
                               borderType: BorderType.RRect,
                               radius: const Radius.circular(24),
-                              dashPattern: [5, 4],
+                              dashPattern: const [5, 4],
                               child: Container(
                                 width: double.infinity,
                                 decoration: const BoxDecoration(

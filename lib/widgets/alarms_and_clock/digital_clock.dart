@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reproductor_ia/controllers/clock_controller.dart';
 
+import '../../utils/theme.dart';
+
 class DigitalClock extends StatefulWidget {
   const DigitalClock({super.key});
 
@@ -31,9 +33,9 @@ class _DigitalClockState extends State<DigitalClock> {
         return Text(
           controller.formattedTime,
           style: TextStyle(
-              fontFamily: 'avenir',
-              color: Theme.of(context).primaryColor,
-              fontSize: 64),
+            color: CustomColors.primaryTextColor,
+            fontSize: 64,
+          ),
         );
       },
     );

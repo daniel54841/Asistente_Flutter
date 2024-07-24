@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reproductor_ia/controllers/clock_controller.dart';
 
+import '../../utils/theme.dart';
 import '../../widgets/alarms_and_clock/clock.dart';
 import '../../widgets/alarms_and_clock/digital_clock.dart';
 
@@ -25,7 +26,7 @@ class ClockView extends StatelessWidget {
             child: Text("Reloj",
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
+                    color: CustomColors.primaryTextColor,
                     fontSize: 18)),
           ),
           Flexible(
@@ -38,7 +39,7 @@ class ClockView extends StatelessWidget {
                   _clockCtrl.formattedDate,
                   style: TextStyle(
                       fontWeight: FontWeight.w300,
-                      color: Theme.of(context).primaryColor,
+                      color: CustomColors.primaryTextColor,
                       fontSize: 20),
                 ),
               ],

@@ -31,6 +31,7 @@ class _ContactViewState extends State<ContactView> {
     Responsive responsive = Responsive.of(context);
     return Scaffold(
       drawer: const DrawerMenu(),
+      backgroundColor: Theme.of(context).splashColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).splashColor,
         title: Text(
