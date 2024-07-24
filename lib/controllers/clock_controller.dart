@@ -13,7 +13,7 @@ class ClockController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    formattedDate = DateFormat('EEE, d MMM').format(now);
+    formattedDate = DateFormat('EEEE, d ,MMMM').format(now);
   }
 
   void initTime() {

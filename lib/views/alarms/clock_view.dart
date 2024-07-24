@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reproductor_ia/controllers/clock_controller.dart';
 
+import '../../widgets/alarms_and_clock/clock.dart';
 import '../../widgets/alarms_and_clock/digital_clock.dart';
 
 class ClockView extends StatelessWidget {
@@ -43,6 +44,16 @@ class ClockView extends StatelessWidget {
               ],
             ),
           ),
+          Flexible(
+            flex: 4,
+            fit: FlexFit.tight,
+            child: Align(
+              alignment: Alignment.center,
+              child: Clock(
+                size: MediaQuery.of(context).size.height / 4,
+              ),
+            ),
+          )
         ],
       ),
     );

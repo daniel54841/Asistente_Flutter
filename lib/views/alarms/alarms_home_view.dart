@@ -27,6 +27,7 @@ class _AlarmsHomeViewState extends State<AlarmsHomeView> {
   Widget build(BuildContext context) {
     Responsive responsive = Responsive.of(context);
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       drawer: const DrawerMenu(),
       appBar: AppBar(
         backgroundColor: Theme.of(context).splashColor,
