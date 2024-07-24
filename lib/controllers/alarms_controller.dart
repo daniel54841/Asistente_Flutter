@@ -21,12 +21,15 @@ class AlarmsController extends GetxController {
         title: 'Reloj', imageSource: 'assets/alarms_timer/clock_icon.png'),
     MenuInfo(MenuType.alarm,
         title: 'Alarmas', imageSource: 'assets/alarms_timer/alarm_icon.png'),
+    /* TODO: Futurible
+    Diseño posible     https://github.com/afzalali15/flutter_alarm_clock/tree/master
     MenuInfo(MenuType.timer,
         title: 'Temporizador',
         imageSource: 'assets/alarms_timer/timer_icon.png'),
     MenuInfo(MenuType.stopwatch,
         title: 'Cronometro',
         imageSource: 'assets/alarms_timer/stopwatch_icon.png'),
+  */
   ];
 
   late Future<List<AlarmInfo>> alarms;

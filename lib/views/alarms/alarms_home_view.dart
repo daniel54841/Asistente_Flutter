@@ -16,7 +16,7 @@ class AlarmsHomeView extends StatefulWidget {
 
 class _AlarmsHomeViewState extends State<AlarmsHomeView> {
   final VoiceController _voiceCtrl = Get.find<VoiceController>();
-  final AlarmsController _alarmCtrl = Get.find<AlarmsController>();
+
   @override
   void initState() {
     _voiceCtrl.initSpeech();
