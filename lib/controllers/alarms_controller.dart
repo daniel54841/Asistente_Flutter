@@ -1,6 +1,11 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../net/data/alarm_info.dart';
 import '../net/data/menu_info.dart';
@@ -34,12 +39,21 @@ class AlarmsController extends GetxController {
 
   late Future<List<AlarmInfo>> alarms;
 
+  late List<AlarmSettings> alarmSettings;
+
   @override
   void onInit() {
     alarmTime = DateTime.now();
     _alarmHelper.initializeDatabase();
     debugPrint("Database Inicializada de forma correccta");
+
+    if (Alarm.android) {
+      checkAndroidNotificationPermission();
+      checkAndroidScheduleExactAlarmPermission();
+    }
+
     loadAlarms();
+
     super.onInit();
   }
 
@@ -48,6 +62,40 @@ class AlarmsController extends GetxController {
   void loadAlarms() {
     alarms = _alarmHelper.getAlarms();
     update();
+  }
+
+  Future<void> checkAndroidNotificationPermission() async {
+    final status = await Permission.notification.status;
+    if (status.isDenied) {
+      alarmPrint('Requesting notification permission...');
+      final res = await Permission.notification.request();
+      alarmPrint(
+        'Notification permission ${res.isGranted ? '' : 'not '}granted',
+      );
+    }
+  }
+
+  Future<void> checkAndroidExternalStoragePermission() async {
+    final status = await Permission.storage.status;
+    if (status.isDenied) {
+      alarmPrint('Requesting external storage permission...');
+      final res = await Permission.storage.request();
+      alarmPrint(
+        'External storage permission ${res.isGranted ? '' : 'not'} granted',
+      );
+    }
+  }
+
+  Future<void> checkAndroidScheduleExactAlarmPermission() async {
+    final status = await Permission.scheduleExactAlarm.status;
+    alarmPrint('Schedule exact alarm permission: $status.');
+    if (status.isDenied) {
+      alarmPrint('Requesting schedule exact alarm permission...');
+      final res = await Permission.scheduleExactAlarm.request();
+      alarmPrint(
+        'Schedule exact alarm permission ${res.isGranted ? '' : 'not'} granted',
+      );
+    }
   }
 
   void updateMenuType(MenuInfo type) {
@@ -101,7 +149,30 @@ class AlarmsController extends GetxController {
           isRepeating: isRepeatSelected);
     }
     Get.back();
+
     loadAlarms();
+  }
+
+  void createAlarm(DateTime selectedDateTime) {
+    bool loopAudio = true;
+    bool vibrate = true;
+    double? volume = 1.0;
+    String assetAudio = "assets/alarms_song/star_wars.mp3";
+    final id = DateTime.now().millisecondsSinceEpoch % 10000 + 1;
+
+    final alarmSettings = AlarmSettings(
+      id: id,
+      dateTime: selectedDateTime,
+      loopAudio: loopAudio,
+      vibrate: vibrate,
+      volume: volume,
+      assetAudioPath: assetAudio,
+      notificationTitle: 'Alarm example',
+      notificationBody: 'Your alarm ($id) is ringing',
+      enableNotificationOnKill: Platform.isAndroid,
+    );
+
+    Alarm.set(alarmSettings: alarmSettings);
   }
 
   void scheduleAlarm(DateTime scheduleAlarmDateTime, AlarmInfo alarmInfo,
@@ -124,7 +195,9 @@ class AlarmsController extends GetxController {
       debugPrint("selectedDateTime: $selectedDateTime");
       alarmTime = selectedDateTime;
       alarmTimeString = DateFormat("HH:mm").format(selectedDateTime);
+      createAlarm(selectedDateTime);
     }
+
     update();
   }
 

@@ -45,6 +45,7 @@ class _AlarmViewState extends State<AlarmView> {
                         children: snapshot.data!.map<Widget>((alarm) {
                           var alarmTime = DateFormat('hh:mm aa')
                               .format(alarm.alarmDateTime!);
+
                           var gradientColor = GradientTemplate
                               .gradientTemplate[alarm.gradientColorIndex!]
                               .colors;
@@ -93,11 +94,6 @@ class _AlarmViewState extends State<AlarmView> {
                                         ),
                                       ],
                                     ), //titulo de la alarma e icono
-                                    Switch(
-                                      onChanged: (bool value) {},
-                                      value: true,
-                                      activeColor: Colors.white,
-                                    ),
                                   ],
                                 ),
                                 Text(
