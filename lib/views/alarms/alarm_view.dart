@@ -125,21 +125,47 @@ class _AlarmViewState extends State<AlarmView> {
                           );
                         }).followedBy([
                           if (alarmsCtrl.currentAlarms!.length < 5)
-                            DottedBorder(
-                              strokeWidth: 2,
-                              color: const Color(0xFFEAECFF),
-                              borderType: BorderType.RRect,
-                              radius: const Radius.circular(24),
-                              dashPattern: const [5, 4],
-                              child: Container(
-                                width: double.infinity,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF444974),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(24)),
+                            Column(
+                              children: [
+                                DottedBorder(
+                                  strokeWidth: 2,
+                                  color: const Color(0xFFEAECFF),
+                                  borderType: BorderType.RRect,
+                                  radius: const Radius.circular(24),
+                                  dashPattern: const [5, 4],
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFF444974),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(24)),
+                                    ),
+                                    child: AlarmCard(),
+                                  ),
                                 ),
-                                child: AlarmCard(),
-                              ),
+                                TextButton(
+                                  child: const Text(
+                                    "Parar Alarma",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    await alarmsCtrl.stopAlarm();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text(
+                                    "TEMP-Parar Todas las Alarmas Sonando",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    await alarmsCtrl.stopAllAlarms();
+                                  },
+                                ),
+                              ],
                             )
                           else
                             const Center(

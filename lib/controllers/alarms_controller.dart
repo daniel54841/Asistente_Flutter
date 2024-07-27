@@ -19,6 +19,8 @@ class AlarmsController extends GetxController {
   bool isRepeatSelected = false;
   AlarmHelper _alarmHelper = AlarmHelper();
 
+  Map<String, int> alarmSettingMap = <String, int>{};
+
   List<AlarmInfo>? currentAlarms = [];
 
   List<MenuInfo> menuItems = [
@@ -129,7 +131,7 @@ class AlarmsController extends GetxController {
     loadAlarms(); //recargar la lista de alarmas disponibles
   }
 
-  void onSaveAlarm() {
+  void onSaveAlarm(String title) {
     DateTime? scheduleAlarmDateTime;
     if (alarmTime!.isAfter(DateTime.now())) {
       scheduleAlarmDateTime = alarmTime;
@@ -140,7 +142,7 @@ class AlarmsController extends GetxController {
     var alarmInfo = AlarmInfo(
       alarmDateTime: scheduleAlarmDateTime,
       gradientColorIndex: currentAlarms!.length,
-      title: "Alarma Predeterminada",
+      title: title != "" ? title : "Alarma Predeterminada",
     );
     _alarmHelper.insertAlarm(alarmInfo);
 
@@ -148,31 +150,36 @@ class AlarmsController extends GetxController {
       scheduleAlarm(scheduleAlarmDateTime, alarmInfo,
           isRepeating: isRepeatSelected);
     }
+
+    createAlarm(scheduleAlarmDateTime!, title);
+
     Get.back();
 
     loadAlarms();
   }
 
-  void createAlarm(DateTime selectedDateTime) {
+  void createAlarm(DateTime selectedDateTime, String title) {
     bool loopAudio = true;
     bool vibrate = true;
     double? volume = 1.0;
     String assetAudio = "assets/alarms_song/star_wars.mp3";
-    final id = DateTime.now().millisecondsSinceEpoch % 10000 + 1;
+    int id = DateTime.now().millisecondsSinceEpoch % 10000 + 1;
 
-    final alarmSettings = AlarmSettings(
+    AlarmSettings alarmSetting = AlarmSettings(
       id: id,
       dateTime: selectedDateTime,
       loopAudio: loopAudio,
       vibrate: vibrate,
       volume: volume,
       assetAudioPath: assetAudio,
-      notificationTitle: 'Alarm example',
+      notificationTitle: title,
       notificationBody: 'Your alarm ($id) is ringing',
       enableNotificationOnKill: Platform.isAndroid,
     );
 
-    Alarm.set(alarmSettings: alarmSettings);
+    alarmSettingMap.addAll({title: id});
+
+    Alarm.set(alarmSettings: alarmSetting);
   }
 
   void scheduleAlarm(DateTime scheduleAlarmDateTime, AlarmInfo alarmInfo,
@@ -195,7 +202,6 @@ class AlarmsController extends GetxController {
       debugPrint("selectedDateTime: $selectedDateTime");
       alarmTime = selectedDateTime;
       alarmTimeString = DateFormat("HH:mm").format(selectedDateTime);
-      createAlarm(selectedDateTime);
     }
 
     update();
@@ -204,5 +210,18 @@ class AlarmsController extends GetxController {
   void updateSwitch(bool value) {
     isRepeatSelected = value;
     update();
+  }
+
+  Future<void> stopAlarm() async {
+    for (AlarmSettings setting in Alarm.getAlarms()) {
+      if (await Alarm.isRinging(setting.id)) {
+        debugPrint("Parando la alarma con el id: ${setting.id}");
+        await Alarm.stop(setting.id);
+      }
+    }
+  }
+
+  Future<void> stopAllAlarms() async {
+    await Alarm.stopAll();
   }
 }
