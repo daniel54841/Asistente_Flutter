@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: Swagger Open-Meteo.com - OpenAPI 3.0
+  description: |-
+    Swagger creado para simplificar la api de Open Meteo
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://api.open-meteo.com/v1
+paths:
+  /forecast:
+    get:
+      parameters:
+        - name: latitude
+          in: query
+          required: true
+          description: Latitud de la ubicación
+          schema:
+            type: integer
+            
+        - name: longitud
+          in: query
+          required: true
+          description: Latitud de la ubicación
+          schema:
+            type: integer
+            
+        - name: current
+          in: query
+          required: true
+          description: Latitud de la ubicación
+          schema:
+            type: string    
+        
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forecast'          
+        
+      
+    
+components:
+  schemas:
+    Forecast:
+      type: object
+      properties:
+        latitude:
+          type: integer
+          format: int64
+          example: 41.63
+        longitud:
+          type: integer
+          format: int64
+          example: -4.77
+        timezone:
+          type: string
+          example: "GMT"
+        hourly:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hourlys'
+    Hourlys:
+      type: object
+      properties:
+        time:
+          type: array
+          xml:
+            name: time
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Time'
+        hourly:
+          type: array
+          xml:
+            name: hourly
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Temprature_2m'    
+    Time:
+      type: array
+      items:
+        type: string
+      
+    Temprature_2m:
+       type: array
+       items:
+         type: string
+      
