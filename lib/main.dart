@@ -6,6 +6,7 @@ import 'package:reproductor_ia/controllers/calendar_controller.dart';
 import 'package:reproductor_ia/controllers/clock_controller.dart';
 import 'package:reproductor_ia/controllers/contacts_controller.dart';
 import 'package:reproductor_ia/controllers/login_controller.dart';
+import 'package:reproductor_ia/controllers/map_controller.dart';
 import 'package:reproductor_ia/controllers/settings_controller.dart';
 import 'package:reproductor_ia/controllers/voice_controller.dart';
 import 'package:reproductor_ia/utils/routes/custom_routes.dart';
@@ -21,6 +22,7 @@ void main() async {
   Get.put(CalendarController());
   Get.put(AlarmsController());
   Get.put(ClockController());
+  Get.put(MapController());
 
   //Firebase inicializacion
   await Firebase.initializeApp();

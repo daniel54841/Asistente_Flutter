@@ -19,7 +19,8 @@ class DrawerMenu extends StatelessWidget {
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: responsive.dp(5.2), top: responsive.dp(2.2)),
+                padding: EdgeInsets.only(
+                    left: responsive.dp(5.2), top: responsive.dp(2.2)),
                 child: Lottie.asset(
                   AssetsRoute.animationPath("Jarvis_Animation"),
                   width: responsive.wp(35), //150
@@ -52,11 +53,15 @@ class DrawerMenu extends StatelessWidget {
             titleRoute: "Alarmas y Reloj",
           ),
           const DrawerItem(
+            route: "/map",
+            iconCard: Icons.map,
+            titleRoute: "Mapa",
+          ),
+          const DrawerItem(
             route: "/settings",
             iconCard: Icons.settings,
             titleRoute: "Configuración",
           ),
-
         ],
       ),
     );

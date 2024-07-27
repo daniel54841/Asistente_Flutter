@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:reproductor_ia/views/alarms/alarms_home_view.dart';
 import 'package:reproductor_ia/views/calendar/calendar_view.dart';
+import 'package:reproductor_ia/views/map/map_view.dart';
 
 /*import '../views/home/home_view.dart';*/
 import '../../views/contact/contact_view.dart';
@@ -39,7 +40,11 @@ class CustomRoutes {
       GetPage(
         name: "/alarms",
         page: () => const AlarmsHomeView(),
-      )
+      ),
+      GetPage(
+        name: "/map",
+        page: () => const MapView(),
+      ),
     ];
   }
 }
