@@ -6,6 +6,7 @@ import '../../controllers/voice_controller.dart';
 import '../../utils/responsive.dart';
 import '../../widgets/alarms_and_clock/buildMenuButton.dart';
 import '../../widgets/drawer/drawer_menu.dart';
+import '../../widgets/floatingbutton/voice_floating_button.dart';
 
 class AlarmsHomeView extends StatefulWidget {
   const AlarmsHomeView({super.key});
@@ -63,6 +64,23 @@ class _AlarmsHomeViewState extends State<AlarmsHomeView> {
             ],
           );
         },
+      ),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {},
+            heroTag: null,
+            child: const Icon(
+              Icons.add_alarm,
+            ),
+          ),
+          SizedBox(
+            height: responsive.dp(1.5),
+          ),
+          const VoiceFloatingButton()
+        ],
       ),
     );
   }
