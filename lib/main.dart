@@ -8,6 +8,7 @@ import 'package:reproductor_ia/controllers/contacts_controller.dart';
 import 'package:reproductor_ia/controllers/login_controller.dart';
 import 'package:reproductor_ia/controllers/map_controller.dart';
 import 'package:reproductor_ia/controllers/settings_controller.dart';
+import 'package:reproductor_ia/controllers/time_controller.dart';
 import 'package:reproductor_ia/controllers/voice_controller.dart';
 import 'package:reproductor_ia/utils/routes/custom_routes.dart';
 
@@ -23,6 +24,7 @@ void main() async {
   Get.put(AlarmsController());
   Get.put(ClockController());
   Get.put(MapController());
+  Get.put(TimeController());
 
   //Firebase inicializacion
   await Firebase.initializeApp();
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
       ),
       initialRoute: "/login",
       getPages: CustomRoutes.getListRoutes(),
