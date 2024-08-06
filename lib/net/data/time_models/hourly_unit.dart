@@ -9,7 +9,7 @@ class RelativeHumidity{
     };
   }
 
-  RelativeHumidity fromJson(Map<String, dynamic> json) {
+  factory RelativeHumidity.fromJson(Map<String, dynamic> json) {
     return RelativeHumidity(
       value: json['value'],
     );
