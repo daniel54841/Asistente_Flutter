@@ -55,7 +55,7 @@ class DrawerMenu extends StatelessWidget {
           const DrawerItem(
             route: "/map",
             iconCard: Icons.map,
-            titleRoute: "Mapa",
+            titleRoute: "El Tiempo",
           ),
           const DrawerItem(
             route: "/settings",
