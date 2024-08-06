@@ -1,33 +1,23 @@
-import 'package:reproductor_ia/net/data/time_models/relative_humidity.dart';
-import 'package:reproductor_ia/net/data/time_models/temperature2m.dart';
-import 'package:reproductor_ia/net/data/time_models/timeunit.dart';
-
 class Hourly{
-  List<TimeUnit>? time;
-  List<Temperature2m>? temperature;
-  List<RelativeHumidity>? humidity;
+  List<String> time;
+  List<double> temperature2m;
+  List<int> relativeHumidity2m;
 
-  Hourly({required this.time, required this.temperature, required this.humidity});
+  Hourly({required this.time, required this.temperature2m, required this.relativeHumidity2m});
 
-  Hourly fromJson(Map<String, dynamic> json) {
+  factory Hourly.fromJson(Map<String, dynamic> json) {
     return Hourly(
-      time:  json['time']?.map((timeunit) => timeunit.fromJson(timeunit)).toList(),
-      temperature: json['temperature_2m']?.map((temperature) => temperature.fromJson(temperature)).toList(),
-      humidity:  json['relative_humidity_2m']?.map((humidity) => humidity.fromJson(humidity)).toList(),
+      time: json['time'].cast<String>(),
+      temperature2m: json['temperature_2m'].cast<double>(),
+      relativeHumidity2m: json['relative_humidity_2m'].cast<int>(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'time': time?.map((timeUnit) {
-        timeUnit.toJson();
-      },).toList(),
-      'temperature_2m': temperature?.map((temperature) {
-        temperature.toJson();
-      }),
-      'relative_humidity_2m': humidity?.map((humidity) {
-        humidity.toJson();
-      }),
+      'time': time,
+      'temperature_2m': temperature2m,
+      'relative_humidity_2m': relativeHumidity2m,
     };
   }
 

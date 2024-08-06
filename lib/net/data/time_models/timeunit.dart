@@ -11,7 +11,7 @@ class TimeUnit{
     };
   }
 
-  TimeUnit fromJson(Map<String, dynamic> json) {
+  factory TimeUnit.fromJson(Map<String, dynamic> json) {
     return TimeUnit(
       value: json['value'],
     );

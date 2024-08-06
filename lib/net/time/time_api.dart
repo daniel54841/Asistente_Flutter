@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 import '../data/time_models/Time.dart';
@@ -13,7 +15,10 @@ class TimeApi{
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      String responseBody = await response.stream.bytesToString();
+      Map<String, dynamic> jsonData = jsonDecode(responseBody);
+      Time time = Time.fromJson(jsonData);
+      return time;
     }
     else {
       print(response.reasonPhrase);
